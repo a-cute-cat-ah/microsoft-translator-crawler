@@ -46,6 +46,8 @@ def request(url:str, method:str="GET", **other) -> http.client.HTTPResponse:
     elif urlinfo["scheme"] == "https":
         conn = http.client.HTTPSConnection(urlinfo["host"], urlinfo["port"])
     # 发送请求
-    response = conn.request(method,urlinfo["path"]+"?"+urlinfo["query"], **other)
+    conn.request(method,urlinfo["path"]+"?"+urlinfo["query"], **other)
+    # 获得响应
+    response = conn.getresponse()
     # 返回请求
     return response
